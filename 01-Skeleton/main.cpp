@@ -27,7 +27,7 @@
 #define WINDOW_ICON_PATH L"brick.ico"
 
 #define TEXTURE_PATH_BRICK L"brick.png"
-#define TEXTURE_PATH_MARIO L"mario_full.png"
+#define TEXTURE_PATH_MARIO L"mario.png"
 
 #define TEXTURE_PATH_MISC L"misc.png"
 
@@ -53,7 +53,7 @@ LPTEXTURE texMario = NULL;
 LPTEXTURE texBrick = NULL;
 LPTEXTURE texMisc = NULL;
 
-//vector<LPGAMEOBJECT> objects;  
+vector<LPGAMEOBJECT> objects;  
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -86,9 +86,15 @@ void LoadResources()
 
 	
 	// objects.push_back(mario);
-	// for(i)		 
-	//		objects.push_back(new CGameObject(BRICK_X+i*BRICK_WIDTH,....);
-	//
+	srand(static_cast <unsigned> (time(0)));
+
+	for (int i = 0; i < 5; i++) {
+		float ran_vX = -.5 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (.5 - (-.5))));
+		float ran_vY = -.2 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (.2 - (-.2))));
+		objects.push_back(new CMario(MARIO_START_X, MARIO_START_Y, ran_vX, ran_vY, texMario));
+	}
+			
+	
 
 	//
 	// int x = BRICK_X;
@@ -103,15 +109,15 @@ void LoadResources()
 */
 void Update(DWORD dt)
 {
-	/*
-	for (int i=0;i<n;i++)
+	
+	for (int i=0;i<5;i++)
 		objects[i]->Update(dt);
-	*/
+	
 
 	//mario->Update(dt);
 	//brick->Update(dt);
 
-	//DebugOutTitle(L"01 - Skeleton %0.1f, %0.1f", mario->GetX(), mario->GetY());
+	DebugOutTitle(L"01 - Skeleton %0.1f, %0.1f", mario->GetX(), mario->GetY());
 }
 
 /*
@@ -139,6 +145,9 @@ void Render()
 
 		//brick->Render();
 		//mario->Render();
+
+		for (int i = 0; i < 5; i++)
+			objects[i]->Render();
 
 		// Uncomment this line to see how to draw a porttion of a texture  
 		//g->Draw(10, 10, texMisc, 300, 117, 317, 134);

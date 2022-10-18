@@ -89,8 +89,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link />
     <Link>
-      <AdditionalDependencies>d3d10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d10.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
